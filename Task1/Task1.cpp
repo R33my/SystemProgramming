@@ -8,11 +8,17 @@
 using namespace std;
 int main()
 {
+	int currlen = 0;
+	int maxlen = 0;
+	int st = -1;
+	int amount = 0;
+
 	string str;
 	stringstream stream(str);
 	cout << "Type something: ";
 	getline(cin, str);
 
+	cout << "Symbols after ':' - ";
 	for (int i = 0; i < str.size(); i++)
 	{
 		if (str[i] == ':' && str[i - 1] != ':')
@@ -25,20 +31,48 @@ int main()
 		}
 	}
 
-	while (cout << "Type something: " && getline(cin, str) && !str.empty()) {
-		int  i = 0, k = 0;
-		stringstream stream(str);
-		string tmp, t;
-		
-		cout << "Symbols after ':' - " << endl;
-		if (t[i] == ':' && t[i - 1] != ':')
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (str[i] == ' ')
 		{
-			for (i; i < str.size(); i++)
+			if (currlen % 2 == 0)
 			{
-				cout << t[i];
+				amount++;
+			}
+			currlen = 0;
+		}
+		else
+		{
+			currlen++;
+		}
+
+		if (i == str.size() - 1)
+		{
+			if (currlen % 2 == 0)
+			{
+				amount++;
 			}
 		}
-		i++;
 	}
+	cout << "\nAmount of even words in sentence: " << amount << endl;
+
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (str[i] == ',')
+		{
+			int temp = i + 2;
+			for (temp; str[temp] != ' '; temp++)
+			{
+				str[temp] = '0';
+			}
+		}
+	}
+
+	cout << "\nSentence without words after ',': ";
+	for (int i = 0; i < str.size(); i++)
+	{
+		cout << str[i];
+	}
+
 	return 0;
 }
